@@ -14,8 +14,8 @@ if uploaded_file:
         df = pd.read_excel(uploaded_file)
         
         # Check if 'code' column exists
-        if 'code' not in df.columns:
-            st.error("The Excel file must contain a 'code' column")
+        if 'eiin' not in df.columns:
+            st.error("The Excel file must contain a 'eiin' column")
         else:
             st.success("File uploaded successfully!")
             
@@ -27,14 +27,14 @@ if uploaded_file:
             if st.button("Process File"):
                 with st.spinner("Processing..."):
                     # Get unique values
-                    unique_values = df["code"].unique()
+                    unique_values = df["eiin"].unique()
                     
                     # Create in-memory Excel file
                     output = io.BytesIO()
                     with pd.ExcelWriter(output, engine='openpyxl') as writer:
                         for value in unique_values:
                             # Filter data for current value
-                            filtered_df = df[df["code"] == value]
+                            filtered_df = df[df["eiin"] == value]
                             
                             # Clean sheet name
                             sheet_name = str(value)[:31]
