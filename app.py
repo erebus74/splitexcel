@@ -17,8 +17,8 @@ if uploaded_file:
         st.success("File uploaded successfully!")
         
         # Show preview
-        st.subheader("Data Preview")
-        st.write(main_df.head())
+        #st.subheader("Data Preview")
+        #st.write(main_df.head())
         
         # Create two columns for buttons
         col1, col2 = st.columns(2)
