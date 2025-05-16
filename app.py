@@ -1,4 +1,3 @@
-
 import pandas as pd
 import streamlit as st
 import io
@@ -28,15 +27,15 @@ if uploaded_file:
             # Original feature: Split by unique values into sheets
             if st.button("Split by Unique Values into Sheets"):
                 with st.spinner("Processing..."):
-                    if 'code' not in main_df.columns:
-                        st.error("The Excel file must contain a 'code' column")
+                    if 'eiin' not in main_df.columns:
+                        st.error("The Excel file must contain a 'eiin' column")
                     else:
-                        unique_values = main_df["code"].unique()
+                        unique_values = main_df["eiin"].unique()
                         output = io.BytesIO()
                         
                         with pd.ExcelWriter(output, engine='openpyxl') as writer:
                             for value in unique_values:
-                                filtered_df = main_df[main_df["code"] == value]
+                                filtered_df = main_df[main_df["eiin"] == value]
                                 sheet_name = str(value)[:31]
                                 for char in [':', '\\', '?', '/', '*', '[', ']']:
                                     sheet_name = sheet_name.replace(char, '')
